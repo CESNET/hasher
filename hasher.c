@@ -396,7 +396,7 @@ set_hash(const char *name, const char *hash, int size, int dig)
 
         if(size > 0) {
                 for(i=0; i < size; i++) {
-                        pos+=snprintf(&hash_hex[pos], 200-pos, "%x", (int)((unsigned char)hash[i]));
+                        pos+=snprintf(&hash_hex[pos], 200-pos, "%02x", (int)((unsigned char)hash[i]));
                 }
         } else {
                 strcpy(hash_hex, hash);
@@ -427,7 +427,7 @@ verify_hash(const char *name, const char *hash, int size, int dig)
         char *buff;
 
         for(i=0; i < size; i++) {
-                pos+=snprintf(&hash_hex[pos], 200-pos, "%x", (int)((unsigned char)hash[i]));
+                pos+=snprintf(&hash_hex[pos], 200-pos, "%02x", (int)((unsigned char)hash[i]));
         }
 
         if(list_hash_opt)
@@ -542,7 +542,7 @@ process_file(char *name)
                         fprintf(stderr, "Actual hash of %s is %s: ", name, digest_types[digests[i]].name);
 
                         for(j=0; j < hash_len[i]; j++) {
-                                fprintf(stderr, "%x", hash[i][j]);
+                                fprintf(stderr, "%02x", hash[i][j]);
                         }
 
                         fprintf(stderr, "\n");
@@ -555,7 +555,7 @@ process_file(char *name)
                 if(export_opt) {
                         printf("%s ", digest_types[digests[i]].name);
                         for(j=0; j < hash_len[i]; j++) {
-                                printf("%x", hash[i][j]);
+                                printf("%02x", hash[i][j]);
                         }
                         printf(" %s\n", name);
                 }
